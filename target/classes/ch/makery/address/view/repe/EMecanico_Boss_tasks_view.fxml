@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="147.0" layoutY="157.0" prefHeight="461.0" prefWidth="865.0" styleClass="table-column-cell" stylesheets="@../Concesionario.css" AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="134.0" AnchorPane.rightAnchor="134.0" AnchorPane.topAnchor="105.0">
+        <columns>
+          <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Vehiculo" />
+          <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Cliente" />
+            <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Fecha Entrada" />
+            <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Tiempo" />
+            <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Materiales" />
+            <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Costes" />
+            <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Mecanico" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <ScrollBar layoutX="766.0" layoutY="105.0" orientation="VERTICAL" prefHeight="528.0" prefWidth="18.0" />
+   </children>
+</AnchorPane>

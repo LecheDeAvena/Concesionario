@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="560.0" vgap="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <VBox maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" prefHeight="51.0" prefWidth="400.0" spacing="7.0" GridPane.columnIndex="1">
+      <children>
+        <Label fx:id="messageLabel" text="Lista de materiales" textAlignment="LEFT" wrapText="true">
+          <font>
+            <Font name="System Bold" size="24.0" />
+          </font>
+        </Label>
+      </children>
+         <GridPane.margin>
+            <Insets left="14.0" top="14.0" />
+         </GridPane.margin>
+    </VBox>
+      <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <HBox maxHeight="-Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <children>
+        <HBox fx:id="actionParent" alignment="CENTER">
+          <HBox.margin>
+            <Insets />
+          </HBox.margin>
+        </HBox>
+        <Pane maxWidth="+Infinity" HBox.hgrow="ALWAYS" />
+        <Button fx:id="cancelButton" cancelButton="true" minWidth="80.0" mnemonicParsing="false" text="Cancel" HBox.hgrow="NEVER">
+          <HBox.margin>
+            <Insets />
+          </HBox.margin>
+        </Button>
+        <HBox fx:id="okParent" alignment="CENTER">
+          <children>
+            <Button fx:id="okButton" minWidth="80.0" mnemonicParsing="false" text="Guardar" HBox.hgrow="NEVER">
+              <HBox.margin>
+                <Insets left="14.0" />
+              </HBox.margin>
+            </Button>
+                  <Pane maxWidth="+Infinity" />
+          </children>
+        </HBox>
+      </children>
+         <padding>
+            <Insets bottom="14.0" right="14.0" top="14.0" />
+         </padding>
+    </HBox>
+      <ScrollPane minWidth="-Infinity" prefHeight="183.0" prefWidth="532.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <content>
+          <AnchorPane>
+               <children>
+                  <ListView layoutX="7.0" prefHeight="400.0" prefWidth="516.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+        </content>
+         <GridPane.margin>
+            <Insets bottom="14.0" left="14.0" right="14.0" />
+         </GridPane.margin>
+      </ScrollPane>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+    <ColumnConstraints hgrow="NEVER" maxWidth="560.0" minWidth="-Infinity" prefWidth="560.0" />
+  </columnConstraints>
+  <padding>
+    <Insets bottom="14.0" top="14.0" />
+  </padding>
+  <rowConstraints>
+      <RowConstraints maxHeight="Infinity" minHeight="10.0" prefHeight="22.0" valignment="CENTER" vgrow="ALWAYS" />
+    <RowConstraints maxHeight="Infinity" minHeight="-Infinity" prefHeight="11.0" valignment="CENTER" vgrow="ALWAYS" />
+    <RowConstraints maxHeight="Infinity" minHeight="-Infinity" prefHeight="200.0" valignment="CENTER" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="Infinity" minHeight="-Infinity" prefHeight="0.0" valignment="CENTER" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="Infinity" minHeight="-Infinity" prefHeight="0.0" valignment="CENTER" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="NEVER" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="NEVER" />
+  </rowConstraints>
+</GridPane>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="752.0" prefWidth="1164.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.NuevoClienteController">
+   <children>
+      <VBox alignment="CENTER" layoutX="7.0" prefHeight="752.0" prefWidth="1164.0" spacing="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="531.0" layoutY="156.0" text="Nuevo Cliente">
+               <font>
+                  <Font name="System Bold" size="56.0" />
+               </font>
+            </Label>
+            <VBox VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER" layoutX="114.0" layoutY="166.0" prefHeight="336.0" prefWidth="1164.0" spacing="30.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Pane HBox.hgrow="ALWAYS" />
+                        <VBox alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+                           <children>
+                              <HBox spacing="50.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <VBox spacing="20.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <HBox HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <VBox layoutX="114.0" layoutY="166.0" spacing="20.0">
+                                                   <children>
+                                                      <VBox spacing="5.0">
+                                                         <children>
+                                                            <Label layoutX="114.0" layoutY="166.0" text="Nombre" />
+                                                            <TextField fx:id="nameField" />
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox spacing="5.0">
+                                                         <children>
+                                                            <Label layoutX="134.0" layoutY="186.0" text="Apellidos" />
+                                                            <TextField fx:id="surnameField" />
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox spacing="5.0">
+                                                         <children>
+                                                            <Label layoutX="134.0" layoutY="186.0" text="Correo" />
+                                                            <TextField fx:id="mailField" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </VBox>
+                                                <Pane HBox.hgrow="ALWAYS" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="573.0" layoutY="216.0" spacing="20.0">
+                                       <children>
+                                          <VBox spacing="5.0">
+                                             <children>
+                                                <Label layoutX="144.0" layoutY="196.0" text="Direccion" />
+                                                <TextField fx:id="dirField" />
+                                             </children>
+                                          </VBox>
+                                          <VBox spacing="5.0">
+                                             <children>
+                                                <Label layoutX="144.0" layoutY="196.0" text="Telefono" />
+                                                <TextField fx:id="tlfField" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <Pane HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <VBox alignment="CENTER" spacing="15.0">
+                     <children>
+                        <HBox>
+                           <children>
+                              <Label fx:id="errorLbl" textFill="RED" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" spacing="20.0">
+                           <children>
+                              <Button fx:id="sendBtn" mnemonicParsing="false" onAction="#crearCliente" prefHeight="60.0" prefWidth="116.0" text="Crear">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#resetFields" prefHeight="60.0" prefWidth="116.0" text="Borrar">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Pane VBox.vgrow="ALWAYS" />
+         </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

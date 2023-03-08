@@ -1,0 +1,114 @@
+/*------------------Button-----------------*/
+.shiny-orange {
+    -fx-background-color: 
+        linear-gradient(#ffd65b, #e68400),
+        linear-gradient(#ffef84, #f2ba44),
+        linear-gradient(#ffea6a, #efaa22),
+        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),
+        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,2,3,0;
+    -fx-text-fill: #654b00;
+    -fx-font-weight: bold;
+}
+.shiny-orange:hover:pressed {
+    -fx-background-color:#eb9834;
+}
+.shiny-orange:hover {
+    -fx-background-color:#fabc73;
+}
+/*--------------SplitMenuButton-------------*/
+.split-menu-button{
+  -fx-background-color: #eb9834;
+  -fx-color: #fac364;
+}
+/*TextFieldButton*/
+.split-menu-button .label:hover{
+  -fx-color: #eb9834;
+}
+/*DesplegableMenuButton*/
+.split-menu-button .arrow-button:hover{
+  -fx-color: #fabc73;
+}
+.split-menu-button .arrow-button:pressed{
+  -fx-color: #eb9834;
+}
+.split-menu-button:showing .arrow-button{
+  -fx-color: #eb9834;
+}
+/*---------------TextField-----------------*/
+.text-field{
+  -fx-background-color: #accbec;
+  -fx-border-color: #eb9834;
+}
+/*----------------DatePicker---------------*/
+/*MiniCalendar Color*/
+.date-picker{
+  -fx-color: #fac364;
+}
+/*Mouse hover MiniCalendar*/
+.date-picker .arrow-button:hover {
+  -fx-background-color: #e0af5a;
+}
+.date-picker:showing .arrow-button {
+  -fx-background-color: #e0af5a;
+}
+/*TextField*/
+.date-picker .text-field {
+  -fx-control-inner-background: #accbec;
+}
+/*Calendar top color*/
+.date-picker-popup .month-year-pane {
+  -fx-background-color: #fac364;
+}
+/*Calendar mouse hover cell*/
+.date-picker .cell:hover {
+  -fx-background-color: #fcca74;
+}
+/*Selected cell*/
+.date-picker .cell:focused {
+  -fx-background-color: #ff7d32;
+}
+/*---------------Toolbar-------------------*/
+.toolbar-background{
+  -fx-background-color: #ff7d32;
+}
+/*----------------Table--------------------*/
+.table-column-cell{
+  -fx-background-color:#accbec;
+  -fx-border-color:#000000;
+}
+.table-view .column-header{
+  -fx-background-color: #125fb3;
+  -fx-text-background-color: #ffffff;
+}
+/*-----------------------------------------*/
+.message-button-background{
+  -fx-background-color: #125fb3;
+  -fx-text-fill: #ffffff;
+}
+/*-----------------------------------------*/
+.radio-button:selected .dot{
+  -fx-background-color: #fac364;
+}
+/*-----------------------------------------*/
+.anchor-pane{
+  -fx-background-color: #9ac3df;
+}
+/*--------------Hyperlink------------------*/
+.hyperlink{
+  -fx-underline: false;
+  -fx-border-color: transparent;
+  -fx-padding: 4 0 4 0;
+  -fx-text-fill: black;
+}
+.hyperlink:hover{
+  -fx-text-fill: #fac364;
+}
+.hyperlink:disabled{
+  -fx-text-fill: grey;
+}
+/*--------------ImageView-----------------*/
+.imageview{
+  -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}

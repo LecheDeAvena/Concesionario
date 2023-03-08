@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextArea layoutY="40.0" prefHeight="200.0" prefWidth="560.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+      <Label layoutY="14.0" text="Material_list" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button cancelButton="true" layoutX="494.0" layoutY="11.0" mnemonicParsing="false" styleClass="button-background" stylesheets="@../Concesionario.css" text="x" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0" />
+      <HBox layoutX="398.0" layoutY="237.39999389648438" spacing="12.0" AnchorPane.bottomAnchor="17.000006103515624" AnchorPane.rightAnchor="15.0">
+         <children>
+            <Button cancelButton="true" mnemonicParsing="false" styleClass="button-background" stylesheets="@../Concesionario.css" text="Close" textAlignment="CENTER" />
+            <Button defaultButton="true" mnemonicParsing="false" styleClass="message-button-background" stylesheets="@../Concesionario.css" text="Save Changes" textAlignment="CENTER" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

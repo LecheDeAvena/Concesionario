@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.TareasMecanicoController">
+   <children>
+      <HBox alignment="CENTER" layoutX="-0.5" prefHeight="700.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <VBox>
+               <children>
+                  <Pane prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                  <HBox spacing="15.0">
+                     <children>
+                        <VBox alignment="CENTER" layoutX="62.0" layoutY="103.0" prefHeight="655.0" prefWidth="549.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Pane prefHeight="5.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                              <HBox alignment="CENTER" layoutX="63.0" layoutY="103.0" prefHeight="31.0" prefWidth="774.0">
+                                 <children>
+                                    <Button fx:id="btnAnteriorMes" layoutX="78.0" layoutY="144.0" mnemonicParsing="false" onAction="#mesAnterior" prefHeight="25.0" prefWidth="31.0" text="&lt;" />
+                                    <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                    <Label fx:id="monthLbl" alignment="CENTER" layoutX="175.0" layoutY="469.0" prefWidth="100.0" text="Month" />
+                                    <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="btnSiguienteMes" layoutX="810.0" layoutY="144.0" mnemonicParsing="false" onAction="#mesSiguiente" prefHeight="25.0" prefWidth="31.0" text="&gt;" />
+                                 </children>
+                              </HBox>
+                              <GridPane fx:id="diasSemana" alignment="CENTER" layoutX="62.0" layoutY="134.0" prefHeight="30.0" prefWidth="774.0">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                              </GridPane>
+                              <GridPane fx:id="cuadriculas" alignment="CENTER" gridLinesVisible="true" layoutX="63.0" layoutY="165.0" prefHeight="373.0" prefWidth="774.0" VBox.vgrow="ALWAYS">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                        <VBox spacing="15.0">
+                           <children>
+                              <Label prefWidth="200.0" text="Tareas" underline="true">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <VBox fx:id="tareasContainer" prefHeight="100.0" spacing="5.0">
+                                 <children>
+                                    <Label fx:id="tPendientesLbl" text="Tareas Pendientes: " />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="25.0" left="10.0" top="25.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Pane prefHeight="250.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -30,6 +30,7 @@ public class TareaDao {
 		session.update(Tarea);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void deleteTarea(Tarea Tarea) {
 		((List<ch.makery.address.models.Tarea>) session).remove(Tarea);
 	}

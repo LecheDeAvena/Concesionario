@@ -39,7 +39,7 @@ public class NuevoVehiculoController {
 	@FXML
 	private Label errorLbl;
 
-	private String codCliente, selectedCliente, placeholderCod;
+	private String codCliente, selectedCliente;
 
 	SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 	Session session = sessionFactory.openSession();
@@ -70,19 +70,24 @@ public class NuevoVehiculoController {
 
 	@FXML
 	/**
-	 * Este método genera un vehículo
+	 * Este método genera un vehículo en la base de datos
 	 */
 	private void crearVehiculo() {
 		errorLbl.setText("");
+		// Si los datos están bien:
 		if (comprobarDatos()) {
 
-			String hql = "FROM Cliente WHERE codCli= '" + codCliente + "'";
+			// Hacmos una consulta y guardamos los datos en un cliente
+			String hql = "FROM Cliente WHERE codCli= " + codCliente;
 			query = session.createQuery(hql);
 			Cliente cliente = (Cliente) query.list().get(0);
 
+			// Tomamos el momento en el que hemos buscado la información
 			long milisegundos = System.currentTimeMillis();
+			// A ese tiempo le damos formato de fecha
 			java.util.Date date = new java.util.Date(milisegundos);
 
+			// Definimos un nuevo vehiculo y le asignamos los valores correspondientes
 			Vehiculo vehiculo = new Vehiculo();
 
 			vehiculo.setCliente(cliente);
@@ -99,8 +104,10 @@ public class NuevoVehiculoController {
 
 			Transaction transaction = sesion.beginTransaction();
 
+			// Guardamos el vehículo
 			sesion.save(vehiculo);
 
+			// Lo subimos a la base de datos
 			transaction.commit();
 
 			sesion.close();
@@ -119,33 +126,43 @@ public class NuevoVehiculoController {
 	 */
 	private boolean comprobarDatos() {
 
+		// Si el campo está vacío:
 		if (modeloField.getText().isEmpty()) {
 			return false;
 		}
+		// Si el campo está vacío o el tipo de dato es incorrecto:
 		if (precioField.getText().isEmpty() || !esNumero(precioField.getText())) {
+			// Si el tipo de dato es incorrecto:
 			if (!esNumero(precioField.getText())) {
 				errorLbl.setText("El precio debe tener un valor numerico");
 			}
 			return false;
 		}
+		// Si el campo está vacío o el tipo de dato es incorrecto:
 		if (nPuertasField.getText().isEmpty() || !esNumero(nPuertasField.getText())) {
+			// Si el tipo de dato es incorrecto:
 			if (!esNumero(nPuertasField.getText())) {
 				errorLbl.setText("El numero de puertas debe tener un valor numerico entero");
 			}
 			return false;
 		}
+		// Si el campo está vacío:
 		if (marcaField.getText().isEmpty()) {
 			return false;
 		}
+		// Si el campo está vacío:
 		if (matriculaField.getText().isEmpty()) {
 			return false;
 		}
+		// Si el campo está vacío:
 		if (colorField.getText().isEmpty()) {
 			return false;
 		}
+		// Si el campo está vacío:
 		if (combustibleField.getText().isEmpty()) {
 			return false;
 		}
+		// Si el campo está vacío:
 		if (selectedCliente.isEmpty()) {
 			errorLbl.setText("No se ha seleccionado cliente");
 			return false;
@@ -155,11 +172,17 @@ public class NuevoVehiculoController {
 	}
 
 	@SuppressWarnings("unchecked")
+	/**
+	 * Este método sirve para la implementación del botón que abre el abanico de clientes
+	 */
 	private void setSplitMenus() {
 
+		// Hacemos una consulta y guardamos los datos en una lista
 		String hql = "SELECT codCli,nomCli,apeCli FROM Cliente";
 		query = session.createQuery(hql);
 		List<Object[]> datosCliente = query.list();
+		
+		// Definimos nuevos elementos
 		MenuItem nuevoItem;
 		String placeholderName;
 
@@ -172,17 +195,16 @@ public class NuevoVehiculoController {
 
 		clienteField.getItems().addAll(nuevoItem);
 
+		// Se le asigna la información a los elementos
 		for (Object[] item : datosCliente) {
 			placeholderName = item[1] + " " + item[2];
-			placeholderCod = item[0].toString();
 			nuevoItem = new MenuItem(placeholderName);
 			nuevoItem.setOnAction(a -> {
 				selectedCliente = ((MenuItem) a.getSource()).getText();
 				clienteField.setText(selectedCliente);
-				codCliente = placeholderCod;
+				codCliente = String.valueOf(item[0]);
 				System.out.println(codCliente);
 			});
-			placeholderCod = "";
 
 			clienteField.getItems().addAll(nuevoItem);
 		}
@@ -216,7 +238,7 @@ public class NuevoVehiculoController {
 			return false;
 		}
 		try {
-			//double numeroDouble = Double.parseDouble(numero);
+			// double numeroDouble = Double.parseDouble(numero);
 			Double.parseDouble(numero);
 		} catch (NumberFormatException nfe) {
 			return false;

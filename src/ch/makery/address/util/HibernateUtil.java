@@ -11,13 +11,12 @@ public class HibernateUtil {
 
 	private static SessionFactory sessionFactory;
 	private static Session session;
-	
-	
+
 	public static Session getSession() {
 		if (sessionFactory == null) {
 			session = getSessionFactory().openSession();
 		}
-				
+
 		return session;
 	}
 
@@ -28,7 +27,7 @@ public class HibernateUtil {
 		}
 		closeSessionFactory();
 	}
-	
+
 	public static SessionFactory getSessionFactory() {
 		if (sessionFactory == null) {
 			StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();

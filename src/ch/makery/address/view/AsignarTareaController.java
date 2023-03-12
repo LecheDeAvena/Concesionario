@@ -1,5 +1,6 @@
 package ch.makery.address.view;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import ch.makery.address.MainApp;
 import ch.makery.address.models.Mecanico;
 import ch.makery.address.models.Mecanico_Tiene_Tarea;
 import ch.makery.address.models.Tarea;
@@ -17,42 +19,43 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class AsignarTareaController {
 
 	@FXML
-	private TableView<Tarea> tablaTareas;
+	private TableView<Tarea> tareasTable;
 	@FXML
-	private TableView<Mecanico> tablaMecanicos;
+	private TableColumn<Tarea, String> tareaCol;
 	@FXML
-	private TableColumn<Tarea, String> tareasCol;
-	@FXML
-	private TableColumn<Tarea, String> nombreTareaCol;
-	@FXML
-	private TableColumn<Tarea, String> fechaEntradaCol;
+	private TableColumn<Tarea, String> clienteCol;
 	@FXML
 	private TableColumn<Tarea, String> vehiculoCol;
 	@FXML
-	private TableColumn<Mecanico, String> nombreMecanicoCol;
+	private TableColumn<Tarea, String> fEnCol;
 	@FXML
-	private TableColumn<Mecanico, Number> nTareasCol;
+	private TableColumn<Tarea, String> costeCol;
 	@FXML
-	private Button sendBtn;
+	private Button asignarTareaBtn;
 	@FXML
 	private Label errorLbl;
 
 	SessionFactory sf = new Configuration().configure().buildSessionFactory();
 	Session session = sf.openSession();
 	Query query = null;
+	ObservableList<Tarea> lista;
 
 	@FXML
 	private void initialize() {
 		crearTablaTarea();
-		crearTablaMecanico();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -61,97 +64,42 @@ public class AsignarTareaController {
 	 */
 	private void crearTablaTarea() {
 
+		// Definir una sentencia y guardar el resultado en una lista
 		String hql = "FROM Tarea t WHERE t.codTar NOT IN (SELECT mtt.tarea.codTar FROM Mecanico_Tiene_Tarea mtt)";
 		query = session.createQuery(hql);
 		List<Tarea> listaResultado = query.list();
 
-		ObservableList<Tarea> lista;
+		// Pasar la información de una lista a otra
 		lista = FXCollections.observableArrayList(listaResultado);
 
-		nombreTareaCol.setCellValueFactory(cellData -> cellData.getValue().nomTarProperty());
+		// Asignar los valores a las celdas
+		
+		tareaCol.setCellValueFactory(cellData -> cellData.getValue().nomTarProperty());
+		clienteCol.setCellValueFactory(cellData -> cellData.getValue().getVehiculo().getCliente().nomAndApeCliProperty());
 		vehiculoCol.setCellValueFactory(cellData -> cellData.getValue().getVehiculo().cocheNameProperty());
-		fechaEntradaCol.setCellValueFactory(cellData -> cellData.getValue().fechIniProperty());
-
-		tablaTareas.setItems(lista);
+		fEnCol.setCellValueFactory(cellData -> cellData.getValue().fechIniProperty());
+		costeCol.setCellValueFactory(cellData -> cellData.getValue().cosTarProperty());
+		
+		tareasTable.setItems(lista);
 	}
-
-	@SuppressWarnings("unchecked")
-	/**
-	 * Este método genera una tabla para las tareas del mecánico
-	 */
-	private void crearTablaMecanico() {
-
-		String hql = "FROM Mecanico";
-		query = session.createQuery(hql);
-		List<Mecanico> listaResultado = query.list();
-
-		ObservableList<Mecanico> lista = FXCollections.observableArrayList(listaResultado);
-
-		hql = "FROM Mecanico_Tiene_Tarea";
-		query = session.createQuery(hql);
-		List<Mecanico_Tiene_Tarea> listaResultadoTareas = query.list();
-
-		ObservableList<Mecanico_Tiene_Tarea> arrayTareas = FXCollections.observableArrayList(listaResultadoTareas);
-
-		nombreMecanicoCol.setCellValueFactory(cellData -> cellData.getValue().getEmpleado().nomAndApeEmpProperty());
-		nTareasCol
-				.setCellValueFactory(
-						cellData -> Bindings.createLongBinding(
-								() -> arrayTareas.stream()
-										.filter(tar -> tar.getEmpleado().getCodEmp() == cellData.getValue()
-												.getEmpleado().getCodEmp())
-										.collect(Collectors.counting()),
-								arrayTareas));
-		tablaMecanicos.setItems(lista);
-	}
-
-	/**
-	 * Este método comprueba los datos de la tabla no están vacíos
-	 * 
-	 * @return
-	 */
-	private boolean datosLlenos() {
-		try {
-			if (tablaTareas.getSelectionModel().getSelectedItem().equals(null)) {
-				return false;
-			}
-			if (tablaMecanicos.getSelectionModel().getSelectedItem().equals(null)) {
-				return false;
-			}
-		} catch (NullPointerException e) {
-			return false;
-		}
-		return true;
-	}
-
+	
 	@FXML
-	/**
-	 * Este método inserta datos a las tablas
-	 */
-	private void insertDatos() {
+	private void asignarTarea() {
+		
+		Tarea selectedItem=tareasTable.getSelectionModel().getSelectedItem();
 		errorLbl.setText("");
-		if (datosLlenos()) {
-			SessionFactory sf = HibernateUtil.getSessionFactory();
-			Session sesion = sf.openSession();
-
-			Transaction transaction = sesion.beginTransaction();
-
-			Tarea tarea = tablaTareas.getSelectionModel().getSelectedItem();
-			Mecanico mecanico = tablaMecanicos.getSelectionModel().getSelectedItem();
-
-			Mecanico_Tiene_Tarea mecanicoTieneTarea = new Mecanico_Tiene_Tarea();
-			mecanicoTieneTarea.setEmpleado(mecanico.getEmpleado());
-			mecanicoTieneTarea.setTarea(tarea);
-
-			sesion.save(mecanicoTieneTarea);
-
-			transaction.commit();
-
-			sesion.close();
-			tablaTareas.refresh();
-			tablaMecanicos.refresh();
-		} else {
-			errorLbl.setText("Se necesita seleccionar tarea y mecanico");
+		
+		if(selectedItem!=null) {
+			
+			MecanicosPopup mp=new MecanicosPopup();
+			mp.displayPopup(tareasTable.getSelectionModel().getSelectedItem());
+			update();
+		}else {
+			errorLbl.setText("No se ha seleccionado ninguna tarea");
 		}
+	}
+	
+	private void update() {
+		tareasTable.refresh();
 	}
 }

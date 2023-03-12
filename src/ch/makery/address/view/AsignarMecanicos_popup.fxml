@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="560.0" prefHeight="280.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.MecanicosPopup">
+   <children>
+      <VBox layoutX="54.0" layoutY="6.0" minWidth="560.0" prefHeight="280.0" prefWidth="560.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ScrollPane hbarPolicy="NEVER" minWidth="537.0" prefViewportHeight="188.0" prefViewportWidth="540.0" VBox.vgrow="ALWAYS">
+               <content>
+                  <ListView fx:id="mecanicosList" layoutX="54.0" layoutY="6.0" minWidth="537.0" prefHeight="186.0" prefWidth="537.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </ListView>
+               </content>
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+            </ScrollPane>
+            <VBox spacing="5.0">
+               <children>
+                  <HBox alignment="CENTER_RIGHT">
+                     <children>
+                        <Label fx:id="errorLbl" textFill="RED" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_RIGHT" spacing="15.0">
+                     <children>
+                        <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cerrarPopup" text="Cancelar" />
+                        <Button fx:id="asignarBtn1" mnemonicParsing="false" onAction="#EnviarDatos" prefHeight="34.0" prefWidth="75.0" text="Asignar" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </children>
+</AnchorPane>

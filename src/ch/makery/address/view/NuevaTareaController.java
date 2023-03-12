@@ -56,15 +56,19 @@ public class NuevaTareaController {
 	 */
 	private void crearTarea() {
 		errorLbl.setText("");
+		// Si los datos están bien:
 		if (comprobarDatos()) {
-
+			// Definimos la consulta y guardamos la información en un vehículo
 			String hql = "FROM Vehiculo WHERE matVeh= '" + matricula + "'";
 			query = session.createQuery(hql);
 			Vehiculo vehiculo = (Vehiculo) query.list().get(0);
 
+			// Obtenemos el tiempo de la consulta
 			long milisegundos = System.currentTimeMillis();
+			// Le damos formato a los milisegundos para guardarlos como una fecha
 			java.util.Date date = new java.util.Date(milisegundos);
 
+			// Definimos una tarea y le asignamos la información correspondiente a cada campo
 			Tarea tarea = new Tarea();
 			tarea.setCosTar(Integer.parseInt(costField.getText()));
 			tarea.setDesTar(desField.getText());
@@ -78,8 +82,10 @@ public class NuevaTareaController {
 
 			Transaction transaction = sesion.beginTransaction();
 
+			// Guardamos la tarea
 			sesion.save(tarea);
 
+			// La subimos a la base de datos
 			transaction.commit();
 
 			sesion.close();
@@ -113,22 +119,28 @@ public class NuevaTareaController {
 	 */
 	private boolean comprobarDatos() {
 
+		// Si el campo está vacío:
 		if (nameField.getText().isEmpty()) {
 			return false;
 		}
+		// Si el campo está vacío o el tipo de dato es incorrecto:
 		if (costField.getText().isEmpty() || !esDouble(costField.getText())) {
+			// Si el campo está lleno pero el tipo de dato es incorrecto:
 			if (!esDouble(costField.getText())) {
 				errorLbl.setText("El coste debe tener un valor numerico");
 			}
 			return false;
 		}
+		// Si el campo está vacío:
 		if (desField.getText().isEmpty()) {
 			return false;
 		}
+		// Si el campo está vacío:
 		if (matricula.isEmpty()) {
 			errorLbl.setText("No se ha seleccionado vehiculo");
 			return false;
 		}
+		// Si el campo está vacío:
 		if (materialField.getText().isEmpty()) {
 			materialField.setText("");
 		}
@@ -142,9 +154,12 @@ public class NuevaTareaController {
 	 */
 	private void setSplitMenu() {
 
+		// Definir una sentencia y guardar el resultado en una lista
 		String hql = "SELECT matVeh,marca,modVeh FROM Vehiculo";
 		query = session.createQuery(hql);
 		List<Object[]> datosVehiculo = query.list();
+		
+		// Se definen nuevos elementos
 		MenuItem nuevoItem;
 		String placeHolder;
 
@@ -155,6 +170,7 @@ public class NuevaTareaController {
 			vehiculoField.setText("-Selecciona vehiculo-");
 		});
 
+		// Se asigna la información a los elementos
 		vehiculoField.getItems().addAll(nuevoItem);
 
 		for (Object[] item : datosVehiculo) {

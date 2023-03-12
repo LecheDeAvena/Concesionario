@@ -49,20 +49,29 @@ public class TareasMecanicoJefeController {
 		crearTabla();
 	}
 
+	/**
+	 * Este método asigna la información de usuario obteniéndola de la toolbar
+	 */
 	private void setUser() {
 		ToolBarController tbc = new ToolBarController();
 		user = tbc.getUserInfo();
 	}
 
 	@SuppressWarnings("unchecked")
+	/**
+	 * Este método crea la tabla
+	 */
 	private void crearTabla() {
 
+		// Se hace una consulta y se guarda la información en una lista
 		String hql = "FROM Mecanico_Tiene_Tarea";
 		query = session.createQuery(hql);
 		List<Mecanico_Tiene_Tarea> res = query.list();
 
+		// Se pasa la información de una lista a otra
 		ObservableList<Mecanico_Tiene_Tarea> array = FXCollections.observableArrayList(res);
 
+		// Se asignan los valores de la lista a las celdas correspondientes
 		tareaCol.setCellValueFactory(cellData -> cellData.getValue().getTarea().nomTarProperty());
 		clienteCol.setCellValueFactory(
 				cellData -> cellData.getValue().getTarea().getVehiculo().getCliente().nomAndApeCliProperty());
@@ -70,7 +79,6 @@ public class TareasMecanicoJefeController {
 		fEnCol.setCellValueFactory(cellData -> cellData.getValue().getTarea().fechIniProperty());
 		costeCol.setCellValueFactory(cellData -> cellData.getValue().getTarea().cosTarProperty());
 		MecanicoCol.setCellValueFactory(cellData -> cellData.getValue().getEmpleado().nomAndApeEmpProperty());
-
 		tareasTable.setItems(array);
 	}
 }

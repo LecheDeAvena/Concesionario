@@ -52,6 +52,10 @@ public class ToolBarController {
 	public void initialize() {
 	}
 
+	/**
+	 * Este método obtiene la información del usuario
+	 * @param event
+	 */
 	public void recoverUserInfo(Stage event) {
 
 		Stage stage = event;
@@ -63,10 +67,16 @@ public class ToolBarController {
 		setFirstScene();
 	}
 
+	/**
+	 * Este método obtiene la información del usuario
+	 */
 	public Empleado getUserInfo() {
 		return user;
 	}
 
+	/**
+	 * Este método asigna el nombre de usuario
+	 */
 	private void setUserSurname() {
 
 		String hql = "SELECT apeEmp " + "FROM Empleado " + "WHERE codEmp='" + user.getCodEmp() + "'";
@@ -76,21 +86,21 @@ public class ToolBarController {
 		user.setApeEmp((String) query.uniqueResult());
 	}
 
+	/**
+	 * Este método asigna la primera pantalla
+	 */
 	private void setFirstScene() {
 
 		FXMLLoader loader = null;
 		Pane newPane = null;
-		/*if (isMechanic()) {
-			loader = new FXMLLoader(MainApp.class.getResource("view/tareasMecanico_view.fxml"));
-			mechanicButtons();
-		}else*/ if (isMechanicChief()) {
+		if (isMechanicChief()) {
 			loader = new FXMLLoader(MainApp.class.getResource("view/tareasMecanicoJefe_view.fxml"));
 			mechanicBossButtons();
 		} else if (isSales()) {
 			loader = new FXMLLoader(MainApp.class.getResource("view/clientesVentas_view.fxml"));
 			salesButtons();
 		} else {
-			loader = new FXMLLoader(MainApp.class.getResource("view/tareasMecanico_view.fxml"));
+			loader = new FXMLLoader(MainApp.class.getResource("view/tareasMecanico_v.fxml"));
 			mechanicButtons();
 		}
 		setButtons();
@@ -106,12 +116,19 @@ public class ToolBarController {
 		rootLayout.getChildren().add(newPane);
 	}
 
+	/**
+	 * Este método asigna botones
+	 */
 	private void setButtons() {
 		for (int i = 0; i < btns.length; i++) {
 			containerBotones.getChildren().addAll(btns[i]);
 		}
 	}
 
+	/**
+	 * Este método cambia la pantalla
+	 * @param file
+	 */
 	private void changeScene(String file) {
 
 		try {
@@ -125,6 +142,10 @@ public class ToolBarController {
 		}
 	}
 
+	/**
+	 * Este método comprueba si el empleado es mecánico
+	 * @return
+	 */
 	private boolean isMechanic() {
 
 		String hql = "SELECT m.empleado.codEmp " + "FROM Mecanico m " + "WHERE NOT m.jefMec=0  AND m.empleado.codEmp = "
@@ -135,6 +156,10 @@ public class ToolBarController {
 		return query.uniqueResult() != null;
 	}
 
+	/**
+	 * Este método comprueba si el empleado es mecánico-jefe
+	 * @return
+	 */
 	private boolean isMechanicChief() {
 
 		String hql = "SELECT m.empleado.codEmp " + "FROM Mecanico m " + "WHERE m.jefMec=0  AND m.empleado.codEmp = "
@@ -146,6 +171,10 @@ public class ToolBarController {
 		return query.uniqueResult() != null;
 	}
 
+	/**
+	 * Este método comprueba si el empleado es ventas
+	 * @return
+	 */
 	private boolean isSales() {
 
 		String hql = "SELECT e.codEmp " + "FROM Ventas v INNER JOIN v.empleado e " + "WHERE e.codEmp = "
@@ -160,6 +189,9 @@ public class ToolBarController {
 		}
 	}
 
+	/**
+	 * Este método asigna los botones de mecánico
+	 */
 	private void mechanicButtons() {
 		btns = new Hyperlink[1];
 		for (int i = 0; i < btns.length; i++) {
@@ -170,22 +202,30 @@ public class ToolBarController {
 		btns[0].setDisable(true);
 	}
 
+	/**
+	 * Este método asigna los botones de mecánico-jefe
+	 */
 	private void mechanicBossButtons() {
-		btns = new Hyperlink[4];
+		btns = new Hyperlink[5];
 		for (int i = 0; i < btns.length; i++) {
 			btns[i] = new Hyperlink();
 		}
 		btns[0].setText("Tareas");
 		btns[0].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/tareasMecanicoJefe_view.fxml"));
 		btns[0].setDisable(true);
-		btns[1].setText("Nueva Tarea");
-		btns[1].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/nuevaTarea_view.fxml"));
-		btns[2].setText("Nuevo vehiculo");
-		btns[2].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/nuevoCoche_view.fxml"));
-		btns[3].setText("Nuevo Cliente");
-		btns[3].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/nuevoCliente_view.fxml"));
+		btns[1].setText("Asignar Tareas");
+		btns[1].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/AsignarMecanicos_view.fxml"));
+		btns[2].setText("Nueva Tarea");
+		btns[2].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/nuevaTarea_view.fxml"));
+		btns[3].setText("Nuevo vehiculo");
+		btns[3].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/nuevoCoche_view.fxml"));
+		btns[4].setText("Nuevo Cliente");
+		btns[4].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/nuevoCliente_view.fxml"));
 	}
 
+	/**
+	 * Este método asigna los botones de ventas
+	 */
 	private void salesButtons() {
 		btns = new Hyperlink[3];
 		for (int i = 0; i < btns.length; i++) {
@@ -200,6 +240,11 @@ public class ToolBarController {
 		btns[2].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/relacionarClientesVentas_view.fxml"));
 	}
 
+	/**
+	 * Este método habilita o deshabilita un botón de ventana
+	 * @param scene
+	 * @return
+	 */
 	private EventHandler<MouseEvent> btnEventHandler(String scene) {
 		EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
 			@Override

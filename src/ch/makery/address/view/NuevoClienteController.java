@@ -26,12 +26,14 @@ public class NuevoClienteController {
 
 	@FXML
 	/**
-	 * Este método crea un cliente si están llenos todos los campos
+	 * Este método crea un cliente en la base de datos
 	 */
 	private void crearCliente() {
 		errorLbl.setText("");
+		// Si los campos están llenos:
 		if (camposLlenos()) {
 
+			// Definimos el cliente y le asignamos la información necesaria
 			Cliente cliente = new Cliente();
 			cliente.setNomCli(nameField.getText());
 			cliente.setApeCli(surnameField.getText());
@@ -44,8 +46,10 @@ public class NuevoClienteController {
 
 			Transaction transaction = sesion.beginTransaction();
 
+			// Guardamos el cliente
 			sesion.save(cliente);
 
+			// Lo subimos a la base de datos
 			transaction.commit();
 
 			sesion.close();
@@ -71,22 +75,28 @@ public class NuevoClienteController {
 
 	/**
 	 * Este método comprueba si los campos están llenos
+	 * 
 	 * @return
 	 */
 	private boolean camposLlenos() {
 
+		// Si el campo está vacío:
 		if (nameField.getText().isEmpty()) {
 			return false;
 		}
+		// Si el campo está vacío:
 		if (surnameField.getText().isEmpty()) {
 			return false;
 		}
+		// Si el campo está vacío:
 		if (tlfField.getText().isEmpty()) {
 			return false;
 		}
+		// Si el campo está vacío:
 		if (mailField.getText().isEmpty()) {
 			return false;
 		}
+		// Si el campo está vacío:
 		if (dirField.getText().isEmpty()) {
 			return false;
 		}

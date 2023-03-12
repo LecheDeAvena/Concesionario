@@ -69,12 +69,7 @@
                                                 <VBox spacing="5.0">
                                                    <children>
                                                       <Label layoutX="622.0" layoutY="366.0" text="Vehiculo" />
-                                                      <SplitMenuButton fx:id="vehiculoField" mnemonicParsing="false" text="-Seleccionar tipo-">
-                                                         <items>
-                                                            <MenuItem mnemonicParsing="false" text="Action 1" />
-                                                            <MenuItem mnemonicParsing="false" text="Action 2" />
-                                                         </items>
-                                                      </SplitMenuButton>
+                                                      <SplitMenuButton fx:id="vehiculoField" mnemonicParsing="false" text="-Seleccionar tipo-" />
                                                    </children>
                                                 </VBox>
                                                 <VBox spacing="5.0">
@@ -110,16 +105,25 @@
             </VBox>
             <HBox alignment="CENTER" spacing="20.0">
                <children>
-                  <Button fx:id="sendBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="116.0" text="Crear">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="resetBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="116.0" text="Borrar">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Button>
+                  <VBox alignment="TOP_CENTER">
+                     <children>
+                        <Label fx:id="errorLbl" textFill="RED" />
+                        <HBox spacing="20.0">
+                           <children>
+                              <Button fx:id="sendBtn" mnemonicParsing="false" onAction="#crearTarea" prefHeight="60.0" prefWidth="116.0" text="Crear">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="resetBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="116.0" text="Borrar">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
             </HBox>
             <Pane VBox.vgrow="ALWAYS" />

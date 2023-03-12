@@ -1,6 +1,5 @@
 package ch.makery.address.view;
 
-import java.sql.Statement;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -9,7 +8,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import ch.makery.address.models.Cliente;
-import ch.makery.address.models.Mecanico_Tiene_Tarea;
 import ch.makery.address.models.Vehiculo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,7 +39,7 @@ public class ClientesVentasController {
 	private TableColumn<Vehiculo, String> vehCostColumn;
 	@FXML
 	private TableColumn<Vehiculo, String> vehFechColumn;
-	
+
 	@FXML
 	private Button editBtn;
 	@FXML
@@ -50,47 +48,58 @@ public class ClientesVentasController {
 	private Button searchBtn;
 	@FXML
 	private TextField searchTextField;
-	
+
 	SessionFactory sf = new Configuration().configure().buildSessionFactory();
 	Session session = sf.openSession();
 	Query query = null;
-	
+
 	@FXML
-	public void initialize(){
+	public void initialize() {
 		setCustomers();
 		setVentas();
 	}
-	
-	@SuppressWarnings("unused")
+
+	@SuppressWarnings("unchecked")
+	/**
+	 * Este método asigna a la tabla los datos correspondientes de clientes
+	 */
 	private void setCustomers() {
-		
+
+		// Definir una sentencia y guardar el resultado en una lista
 		String hql = "FROM Cliente";
 		query = session.createQuery(hql);
 		List<Cliente> res = query.list();
-		
+
+		// Pasar la información de una lista a otra
 		ObservableList<Cliente> array = FXCollections.observableArrayList(res);
-		
+
+		// Asignar los valores a las celdas
 		clientNameColumn.setCellValueFactory(cellData -> cellData.getValue().nomAndApeCliProperty());
-		clientTlfColumn.setCellValueFactory(cellData-> cellData.getValue().phoneProperty());
-		clientMailColumn.setCellValueFactory(cellData-> cellData.getValue().mailProperty());
-		clientDirColumn.setCellValueFactory(cellData-> cellData.getValue().dirProperty());
-		
+		clientTlfColumn.setCellValueFactory(cellData -> cellData.getValue().phoneProperty());
+		clientMailColumn.setCellValueFactory(cellData -> cellData.getValue().mailProperty());
+		clientDirColumn.setCellValueFactory(cellData -> cellData.getValue().dirProperty());
 		customerTable.setItems(array);
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	/**
+	 * Este método asigna a la tabla los datos correspondientes de ventas
+	 */
 	private void setVentas() {
-		
-		String hql = "FROM Vehiculo ";
+
+		// Definir una sentencia y guardar el resultado en una lista
+		String hql = "FROM Vehiculo";
 		query = session.createQuery(hql);
 		List<Vehiculo> res = query.list();
-		
-		ObservableList<Vehiculo> array = FXCollections.observableArrayList(res);
-		
-		vehMarColumn.setCellValueFactory(cellData -> cellData.getValue().marcaProperty());
-		vehModelColumn.setCellValueFactory(cellData-> cellData.getValue().modelProperty());
-		vehCostColumn.setCellValueFactory(cellData-> cellData.getValue().precioProperty());
-		vehFechColumn.setCellValueFactory(cellData-> cellData.getValue().fechProperty());
 
+		// Pasar la información de una lista a otra
+		ObservableList<Vehiculo> array = FXCollections.observableArrayList(res);
+
+		// Asignar los valores a las celdas
+		vehMarColumn.setCellValueFactory(cellData -> cellData.getValue().marcaProperty());
+		vehModelColumn.setCellValueFactory(cellData -> cellData.getValue().modelProperty());
+		vehCostColumn.setCellValueFactory(cellData -> cellData.getValue().precioProperty());
+		vehFechColumn.setCellValueFactory(cellData -> cellData.getValue().fechProperty());
 		suggestionTable.setItems(array);
 	}
 }

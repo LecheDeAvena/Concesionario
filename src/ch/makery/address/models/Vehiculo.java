@@ -125,7 +125,7 @@ public class Vehiculo implements Serializable {
 	}
 
 	public SimpleStringProperty precioProperty() {
-		return new SimpleStringProperty(String.valueOf(this.preVeh));
+		return new SimpleStringProperty(String.valueOf(this.preVeh)+" €");
 	}
 
 	@Column(name = "MatVeh")

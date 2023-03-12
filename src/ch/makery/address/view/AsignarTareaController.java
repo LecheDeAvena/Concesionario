@@ -1,33 +1,20 @@
 package ch.makery.address.view;
 
-import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import ch.makery.address.MainApp;
-import ch.makery.address.models.Mecanico;
-import ch.makery.address.models.Mecanico_Tiene_Tarea;
 import ch.makery.address.models.Tarea;
-import ch.makery.address.util.HibernateUtil;
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 public class AsignarTareaController {
 
@@ -93,13 +80,24 @@ public class AsignarTareaController {
 			
 			MecanicosPopup mp=new MecanicosPopup();
 			mp.displayPopup(tareasTable.getSelectionModel().getSelectedItem());
-			update();
 		}else {
 			errorLbl.setText("No se ha seleccionado ninguna tarea");
 		}
 	}
 	
-	private void update() {
+	public void update() {
+		
+		String hql = "FROM Tarea t WHERE t.codTar NOT IN (SELECT mtt.tarea.codTar FROM Mecanico_Tiene_Tarea mtt)";
+		query = session.createQuery(hql);
+		List<Tarea> listaTemp = query.list();
+
+		Iterator<Tarea> iTemp = listaTemp.iterator();
+		
+		lista = FXCollections.observableArrayList();
+		for (int i = 0; i < listaTemp.size(); i++) {
+			lista.add(listaTemp.get(i));
+		}
+		
 		tareasTable.refresh();
 	}
 }

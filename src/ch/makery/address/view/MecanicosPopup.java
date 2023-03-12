@@ -92,7 +92,6 @@ public class MecanicosPopup {
 			mtt.setEmpleado(selec);
 			mtt.setTarea(tarea);
 
-
 			
 			if (!session.getTransaction().equals(TransactionStatus.ACTIVE)) {
 				session.getTransaction().begin();

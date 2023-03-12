@@ -1,6 +1,7 @@
 package ch.makery.address.models;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import javafx.beans.property.SimpleStringProperty;
+
 import javax.persistence.Id;
 
 @Entity
@@ -79,6 +83,10 @@ public class Ventas_Vende_Vehiculo implements Serializable {
 	public void setFecVen(Date fecVen) {
 		this.fecVen = fecVen;
 	}
+	
+	public SimpleStringProperty fecVenProperty() {
+		return new SimpleStringProperty(new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").format(this.fecVen));
+	}
 
 	@Column(name = "Venta")
 	public boolean getVenta() {
@@ -87,5 +95,13 @@ public class Ventas_Vende_Vehiculo implements Serializable {
 
 	public void setVenta(boolean venta) {
 		this.venta = venta;
+	}
+
+	public SimpleStringProperty venProperty() {
+		if (this.venta) {
+			return new SimpleStringProperty("Vendido");
+		} else {
+			return new SimpleStringProperty("Pendiente");
+		}
 	}
 }

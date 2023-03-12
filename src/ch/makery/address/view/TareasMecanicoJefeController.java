@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
@@ -47,6 +48,7 @@ public class TareasMecanicoJefeController {
 	public void initialize() {
 		setUser();
 		crearTabla();
+		setTabla();
 	}
 
 	/**
@@ -55,6 +57,20 @@ public class TareasMecanicoJefeController {
 	private void setUser() {
 		ToolBarController tbc = new ToolBarController();
 		user = tbc.getUserInfo();
+	}
+	
+	private void setTabla() {
+		tareasTable.setRowFactory( tv -> {
+		    TableRow<Mecanico_Tiene_Tarea> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		        	Mecanico_Tiene_Tarea rowData = row.getItem();
+		        	TareasPopup tp=new TareasPopup();
+		    		tp.displayPopup(rowData.getTarea());
+		        }
+		    });
+		    return row ;
+		});
 	}
 
 	@SuppressWarnings("unchecked")

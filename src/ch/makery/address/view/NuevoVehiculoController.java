@@ -1,5 +1,6 @@
 package ch.makery.address.view;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -9,6 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import ch.makery.address.models.Cliente;
+import ch.makery.address.models.Empleado;
 import ch.makery.address.models.Vehiculo;
 import ch.makery.address.util.HibernateUtil;
 import javafx.fxml.FXML;
@@ -44,10 +46,14 @@ public class NuevoVehiculoController {
 	SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 	Session session = sessionFactory.openSession();
 	Query query = null;
+	Empleado user;
 
 	@FXML
 	private void initialize() {
 		setSplitMenus();
+		
+		ToolBarController tbc= new ToolBarController();
+		user=tbc.getUserInfo();
 	}
 
 	@FXML
@@ -82,10 +88,8 @@ public class NuevoVehiculoController {
 			query = session.createQuery(hql);
 			Cliente cliente = (Cliente) query.list().get(0);
 
-			// Tomamos el momento en el que hemos buscado la información
-			long milisegundos = System.currentTimeMillis();
 			// A ese tiempo le damos formato de fecha
-			java.util.Date date = new java.util.Date(milisegundos);
+			Date date = new Date();
 
 			// Definimos un nuevo vehiculo y le asignamos los valores correspondientes
 			Vehiculo vehiculo = new Vehiculo();
@@ -98,6 +102,7 @@ public class NuevoVehiculoController {
 			vehiculo.setModVeh(modeloField.getText());
 			vehiculo.setPreVeh(Integer.parseInt(precioField.getText()));
 			vehiculo.setTipGas(combustibleField.getText());
+			vehiculo.setConcesionario(user.getConcesionario());
 
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			Session sesion = sessionFactory.openSession();

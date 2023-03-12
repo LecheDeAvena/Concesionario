@@ -99,9 +99,12 @@ public class ToolBarController {
 		} else if (isSales()) {
 			loader = new FXMLLoader(MainApp.class.getResource("view/clientesVentas_view.fxml"));
 			salesButtons();
-		} else {
+		} else if(isMechanic()){
 			loader = new FXMLLoader(MainApp.class.getResource("view/tareasMecanico_v.fxml"));
 			mechanicButtons();
+		}else {
+			loader = new FXMLLoader(MainApp.class.getResource("view/ResumenVentas_view.fxml"));
+			bossButtons();
 		}
 		setButtons();
 
@@ -234,10 +237,23 @@ public class ToolBarController {
 		btns[0].setText("Clientes");
 		btns[0].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/clientesVentas_view.fxml"));
 		btns[0].setDisable(true);
-		btns[1].setText("Coches");
+		btns[1].setText("Concesionarios");
 		btns[1].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/cochesVentas_view.fxml"));
-		btns[2].setText("Ventas");
-		btns[2].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/relacionarClientesVentas_view.fxml"));
+		btns[2].setText("Nueva propuesta");
+		btns[2].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/nuevaPropuesta.fxml"));
+	}
+	
+	/**
+	 * Este método asigna los botones del jefe
+	 */
+	private void bossButtons() {
+		btns = new Hyperlink[1];
+		for (int i = 0; i < btns.length; i++) {
+			btns[i] = new Hyperlink();
+		}
+		btns[0].setText("Resumen de ventas");
+		btns[0].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/ResumenVentas_view.fxml.fxml"));
+		btns[0].setDisable(true);
 	}
 
 	/**

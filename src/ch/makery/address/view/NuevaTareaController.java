@@ -1,6 +1,7 @@
 package ch.makery.address.view;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -66,7 +67,7 @@ public class NuevaTareaController {
 			// Obtenemos el tiempo de la consulta
 			long milisegundos = System.currentTimeMillis();
 			// Le damos formato a los milisegundos para guardarlos como una fecha
-			java.util.Date date = new java.util.Date(milisegundos);
+			Date date = new Date();
 
 			// Definimos una tarea y le asignamos la información correspondiente a cada campo
 			Tarea tarea = new Tarea();

@@ -1,6 +1,7 @@
 package ch.makery.address.view;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -51,6 +52,7 @@ public class TareasMecanicoController {
 	SessionFactory sf = new Configuration().configure().buildSessionFactory();
 	Session session = sf.openSession();
 	Query query = null;
+	ObservableList<Mecanico_Tiene_Tarea> data;
 	FilteredList<Mecanico_Tiene_Tarea> pendientes;
 	FilteredList<Mecanico_Tiene_Tarea> terminadas;
 
@@ -90,7 +92,7 @@ public class TareasMecanicoController {
 		List<Mecanico_Tiene_Tarea> res = query.list();
 
 		// Se pasa la información a una lista diferente
-		ObservableList<Mecanico_Tiene_Tarea> data = FXCollections.observableArrayList(res);
+		data = FXCollections.observableArrayList(res);
 
 		pendientes=new FilteredList<>(data, e -> e.getTarea().getFecFin()==(null));
 		terminadas=new FilteredList<>(data, e -> e.getTarea().getFecFin()!=(null));
@@ -134,9 +136,33 @@ public class TareasMecanicoController {
             @Override
             public void handle(ActionEvent event) {
             	finalizarTarea();
+
+        		update();
             }
         });
+		
 	}
+	
+	private void update() {
+		
+		String hql = "FROM Mecanico_Tiene_Tarea mtt WHERE mtt.empleado.codEmp=" + user.getCodEmp();
+		query = session.createQuery(hql);
+		List<Mecanico_Tiene_Tarea> listaTemp = query.list();
+
+		Iterator<Mecanico_Tiene_Tarea> iTemp = listaTemp.iterator();
+		
+		data = FXCollections.observableArrayList();
+		for (int i = 0; i < listaTemp.size(); i++) {
+			data.add(listaTemp.get(i));
+		}
+		
+		pendientes=new FilteredList<>(data, e -> e.getTarea().getFecFin()==(null));
+		terminadas=new FilteredList<>(data, e -> e.getTarea().getFecFin()!=(null));
+		
+		tareasTable.setItems(pendientes);
+		tareasTable.refresh();
+	}
+
 	private void disableFinishTareaBtn() {
 
 		terminarTareaBtn.setDisable(true);
@@ -183,15 +209,5 @@ public class TareasMecanicoController {
 		
 		crearTablaPendientes();
 	}
-	
-	/*
-	private void cancelarFinTarea() {
-		
-		Tarea selectedItem=tareasTable.getSelectionModel().getSelectedItem().getTarea();
-		selectedItem.setFecFin(null);
-		
-		session.update(selectedItem);
-		session.getTransaction().commit();
-	}*/
 	
 }

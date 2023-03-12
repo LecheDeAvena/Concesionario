@@ -11,7 +11,7 @@
    <children>
       <VBox prefHeight="752.0" prefWidth="1164.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox>
+            <HBox VBox.vgrow="ALWAYS">
                <children>
                   <Pane HBox.hgrow="ALWAYS" />
                   <VBox spacing="30.0" HBox.hgrow="ALWAYS">
@@ -23,7 +23,16 @@
                               <Pane />
                            </children>
                         </HBox>
-                        <TableView fx:id="tareasTable" layoutX="147.0" layoutY="157.0" prefHeight="461.0" prefWidth="865.0">
+                        <HBox alignment="TOP_CENTER">
+                           <children>
+                              <Label text="Tareas del concesionario">
+                                 <font>
+                                    <Font name="System Bold Italic" size="28.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <TableView fx:id="tareasTable" layoutX="147.0" layoutY="157.0" prefHeight="461.0" prefWidth="865.0" VBox.vgrow="ALWAYS">
                           <columns>
                               <TableColumn fx:id="tareaCol" editable="false" prefWidth="75.0" sortable="false" text="Tarea" />
                             <TableColumn fx:id="clienteCol" editable="false" prefWidth="75.0" sortable="false" text="Cliente" />
@@ -39,15 +48,7 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <HBox alignment="CENTER">
-                           <children>
-                              <Button fx:id="nuevaTareaBtn" mnemonicParsing="false" text="Nueva tarea">
-                                 <font>
-                                    <Font size="19.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </HBox>
+                        <Pane VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                   <Pane HBox.hgrow="ALWAYS" />

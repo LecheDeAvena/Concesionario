@@ -108,6 +108,10 @@ public class Empleado {
 	public void setGmaEmp(String gmaEmp) {
 		this.gmaEmp = gmaEmp;
 	}
+	
+	public SimpleStringProperty gmailProperty() {
+		return new SimpleStringProperty(this.gmaEmp);
+	}
 
 	@Column(name = "TlfEmp")
 	public String getTlfEmp() {
@@ -116,6 +120,10 @@ public class Empleado {
 
 	public void setTlfEmp(String tlfEmp) {
 		this.tlfEmp = tlfEmp;
+	}
+	
+	public SimpleStringProperty tlfProperty() {
+		return new SimpleStringProperty(this.tlfEmp);
 	}
 
 	@Column(name = "DirEmp")
@@ -126,6 +134,10 @@ public class Empleado {
 	public void setDirEmp(String dirEmp) {
 		this.dirEmp = dirEmp;
 	}
+	
+	public SimpleStringProperty dirProperty() {
+		return new SimpleStringProperty(this.dirEmp);
+	}
 
 	@Column(name = "SalEmp")
 	public int getSalEmp() {
@@ -134,6 +146,10 @@ public class Empleado {
 
 	public void setSalEmp(int salEmp) {
 		this.salEmp = salEmp;
+	}
+	
+	public SimpleStringProperty salProperty() {
+		return new SimpleStringProperty(String.valueOf(this.salEmp));
 	}
 
 	@Column(name = "FecIni")
@@ -152,6 +168,10 @@ public class Empleado {
 
 	public void setDniEmp(String dniEmp) {
 		this.dniEmp = dniEmp;
+	}
+	
+	public SimpleStringProperty dniProperty() {
+		return new SimpleStringProperty(this.dniEmp);
 	}
 
 	@Column(name = "ConEmp")

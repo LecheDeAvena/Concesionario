@@ -244,16 +244,22 @@ public class ToolBarController {
 	}
 	
 	/**
-	 * Este método asigna los botones del jefe
+	 * Este método asigna los botones del jefe 
 	 */
 	private void bossButtons() {
-		btns = new Hyperlink[1];
+		btns = new Hyperlink[4];
 		for (int i = 0; i < btns.length; i++) {
 			btns[i] = new Hyperlink();
 		}
 		btns[0].setText("Resumen de ventas");
-		btns[0].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/ResumenVentas_view.fxml.fxml"));
+		btns[0].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/ResumenVentas_view.fxml"));
 		btns[0].setDisable(true);
+		btns[1].setText("Empleados");
+		btns[1].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/listaEmpleados_view.fxml"));
+		btns[2].setText("Vehiculos");
+		btns[2].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/listaVehiculos_view.fxml"));
+		btns[3].setText("Crear empleado");
+		btns[3].addEventHandler(MouseEvent.MOUSE_CLICKED, btnEventHandler("view/nuevoEmpleado_view.fxml"));
 	}
 
 	/**
